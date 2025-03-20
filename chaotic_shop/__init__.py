@@ -7,19 +7,17 @@ app, rt = fast_app()
 
 @rt("/")
 def get():
-    product_list = Div(
+    categories = core.ADJECTIVES
+    category_list = Div(
         *[
             Div(
-                H2(product["name"]),
-                P(product["description"]),
-                P(product["price"]),
-                P(product["category"]),
-                A("View", href=f"/product/{product['id']}"),
-                _class="product",
+                H2(category),
+                A("View Products", href=f"/category/{category}"),
+                _class="category",
             )
-            for product in core.PRODUCTS
+            for category in categories
         ],
-        _id="products",
+        _id="categories",
     )
     return Html(
         Head(Title("Chaotic Shop"), Style(CSS)),
@@ -36,7 +34,44 @@ def get():
                 ),
                 _class="container",
             ),
-            Div(H1("Welcome to Chaotic Shop!"), product_list, _class="container"),
+            Div(H1("Welcome to Chaotic Shop!"), category_list, _class="container"),
+        ),
+    )
+
+
+@rt("/category/{category}")
+def get(category: str):
+    products = core.get_products_by_category(category)
+    product_list = Div(
+        *[
+            Div(
+                H2(product["name"]),
+                P(product["description"]),
+                P(product["price"]),
+                P(product["category"]),
+                A("View", href=f"/product/{product['id']}"),
+                _class="product",
+            )
+            for product in products
+        ],
+        _id="products",
+    )
+    return Html(
+        Head(Title(f"Products in {category}"), Style(CSS)),
+        Body(
+            Div(
+                Header(
+                    Div(H1("Chaotic Shop"), _id="branding"),
+                    Nav(
+                        Ul(
+                            Li(A("Home", href="/")),
+                            Li(A("Products", href="/")),
+                        )
+                    ),
+                ),
+                _class="container",
+            ),
+            Div(H1(f"Products in {category}"), product_list, _class="container"),
         ),
     )
 

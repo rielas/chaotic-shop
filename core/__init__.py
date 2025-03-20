@@ -1,4 +1,7 @@
 from .names import ADJECTIVES, NOUNS, DESCRIPTIONS
+from typing import Generator
+
+NUMBER_OF_PRODUCTS = 100
 
 
 def get_category(id: int) -> str:
@@ -40,10 +43,14 @@ def generate_description(id: int) -> str:
     return random.choice(DESCRIPTIONS)
 
 
-def generate_product_by_id(id: int) -> dict:
+def generate_product_by_id(id: int) -> dict | None:
     """
     Generate a product dictionary by ID.
     """
+
+    if id < 0 or id > NUMBER_OF_PRODUCTS:
+        return None
+
     return {
         "id": id,
         "name": generate_product_name(id),
@@ -53,4 +60,17 @@ def generate_product_by_id(id: int) -> dict:
     }
 
 
-PRODUCTS = [generate_product_by_id(i) for i in range(1, 101)]
+def product_generator() -> Generator[dict]:
+    """
+    Generator function to yield products one by one.
+    """
+
+    for i in range(NUMBER_OF_PRODUCTS):
+        yield generate_product_by_id(i)
+
+
+def get_products_by_category(category: str) -> Generator[dict]:
+    index = ADJECTIVES.index(category)
+
+    for i in range(index, NUMBER_OF_PRODUCTS, len(ADJECTIVES)):
+        yield generate_product_by_id(i)

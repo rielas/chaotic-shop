@@ -56,23 +56,23 @@ header nav {
 #showcase p {
     font-size: 20px;
 }
-#products {
+#products, #categories {
     margin: 20px 0;
 }
-.product {
+.product, .category {
     background: #fff;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.product h2 {
+.product h2, .category h2 {
     margin-top: 0;
 }
-.product p {
+.product p, .category p {
     margin: 10px 0;
 }
-.product a {
+.product a, .category a {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
@@ -81,7 +81,7 @@ header nav {
     border-radius: 5px;
     text-decoration: none;
 }
-.product a:hover {
+.product a:hover, .category a:hover {
     background: #77aaff;
 }
 """

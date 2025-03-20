@@ -1,6 +1,28 @@
-from fasthtml.common import *
+from fasthtml.common import (
+    Html,
+    Head,
+    Title,
+    Body,
+    Div,
+    H1,
+    H2,
+    P,
+    A,
+    Form,
+    Input,
+    Textarea,
+    Label,
+    fast_app,
+    Style,
+    Header,
+    Nav,
+    Ul,
+    Li,
+    serve,
+)
 import core
-from .style import CSS
+from chaotic_shop.style import CSS
+import time
 
 app, rt = fast_app()
 
@@ -104,6 +126,26 @@ def get(product_id: int):
                     A("Back to products", href="/"),
                     _class="container",
                 ),
+                Div(
+                    H2("Leave a Review"),
+                    Form(
+                        Input(type="hidden", name="product_id", value=product_id),
+                        Div(
+                            Label("Name:"),
+                            Input(type="text", name="name", required=True),
+                        ),
+                        Div(
+                            Label("Review:"),
+                            Textarea(name="review", required=True),
+                        ),
+                        Div(
+                            Input(type="submit", value="Submit"),
+                        ),
+                        method="post",
+                        action="/submit_review",
+                    ),
+                    _class="container",
+                ),
             ),
         )
     else:
@@ -129,6 +171,41 @@ def get(product_id: int):
                 ),
             ),
         )
+
+
+@rt("/submit_review", methods=["POST"])
+def post(request: dict):
+    product_id = request.get("product_id")
+    name = request.get("name")
+    review = request.get("review")
+
+    print(f"Received review for product {product_id} from {name}: {review}")
+
+    time.sleep(4)
+
+    return Html(
+        Head(Title("Review Submitted"), Style(CSS)),
+        Body(
+            Div(
+                Header(
+                    Div(H1("Chaotic Shop"), _id="branding"),
+                    Nav(
+                        Ul(
+                            Li(A("Home", href="/")),
+                            Li(A("Products", href="/")),
+                        )
+                    ),
+                ),
+                _class="container",
+            ),
+            Div(
+                H1("Thank you for your review!"),
+                P(f"Review for product {product_id} from {name}: {review}"),
+                A("Back to products", href="/"),
+                _class="container",
+            ),
+        ),
+    )
 
 
 def main():

@@ -2,19 +2,26 @@
 name = "chaotic-shop"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Anatol Karalkoŭ",email = "anatol1988@gmail.com"}
-]
+authors = [{ name = "Anatol Karalkoŭ", email = "anatol1988@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-    "python-fasthtml"
-]
+dependencies = ["python-fasthtml"]
+
+[project.scripts]
+chaotic_shop = "chaotic_shop:main"
 
 [tool.poetry]
-packages = [{include = "chaotic_shop", from = "src"}]
-package-mode = false
+packages = [
+    { include = "chaotic_shop" },
+    { include = "core" },
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

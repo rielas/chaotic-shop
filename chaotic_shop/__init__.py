@@ -146,6 +146,18 @@ def get(product_id: int):
                     ),
                     _class="container",
                 ),
+                Div(
+                    H2("Checkout"),
+                    Form(
+                        Input(type="hidden", name="product_id", value=product_id),
+                        Div(
+                            Input(type="submit", value="Checkout"),
+                        ),
+                        method="post",
+                        action="/checkout",
+                    ),
+                    _class="container",
+                ),
             ),
         )
     else:
@@ -201,6 +213,40 @@ def post(request: dict):
             Div(
                 H1("Thank you for your review!"),
                 P(f"Review for product {product_id} from {name}: {review}"),
+                A("Back to products", href="/"),
+                _class="container",
+            ),
+        ),
+    )
+
+
+@rt("/checkout", methods=["POST"])
+def post(request: dict):
+    product_id = request.get("product_id")
+
+    print(f"Processing checkout for product {product_id}")
+
+    # Simulate processing delay
+    time.sleep(4)
+
+    return Html(
+        Head(Title("Checkout Complete"), Style(CSS)),
+        Body(
+            Div(
+                Header(
+                    Div(H1("Chaotic Shop"), _id="branding"),
+                    Nav(
+                        Ul(
+                            Li(A("Home", href="/")),
+                            Li(A("Products", href="/")),
+                        )
+                    ),
+                ),
+                _class="container",
+            ),
+            Div(
+                H1("Checkout Complete"),
+                P(f"Your checkout for product {product_id} is complete."),
                 A("Back to products", href="/"),
                 _class="container",
             ),

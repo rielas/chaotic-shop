@@ -1,0 +1,20 @@
+[project]
+name = "chaotic-shop"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Anatol Karalkoŭ",email = "anatol1988@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-fasthtml"
+]
+
+[tool.poetry]
+packages = [{include = "chaotic_shop", from = "src"}]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

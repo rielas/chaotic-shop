@@ -1,5 +1,5 @@
 from fasthtml.common import *
-from core import products
+import core
 
 app, rt = fast_app()
 
@@ -14,7 +14,7 @@ def get():
                 P(product["price"]),
                 A("View", href=f"/product/{product['id']}"),
             )
-            for product in products
+            for product in core.PRODUCTS
         ]
     )
     return Div(H1("Welcome to Chaotic Shop!"), product_list)
@@ -22,7 +22,7 @@ def get():
 
 @rt("/product/{product_id}")
 def get(product_id: int):
-    product = next((p for p in products if p["id"] == int(product_id)), None)
+    product = core.generate_product_by_id(product_id)
 
     if product:
         return Div(

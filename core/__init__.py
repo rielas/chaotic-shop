@@ -1,24 +1,45 @@
-products = [
-    {
-        "id": 1,
-        "name": "Product 1",
-        "description": "Description of Product 1",
-        "price": "$10",
-    },
-    {
-        "id": 2,
-        "name": "Product 2",
-        "description": "Description of Product 2",
-        "price": "$20",
-    },
-    {
-        "id": 3,
-        "name": "Product 3",
-        "description": "Description of Product 3",
-        "price": "$30",
-    },
+from .names import ADJECTIVES, NOUNS, DESCRIPTIONS
+
+def generate_product_name(id: int) -> str:
+    """
+    Generate a product name by combining an adjective and a noun.
+    """
+    import random
+    random.seed(id)
+    adjective = random.choice(ADJECTIVES)
+    noun = random.choice(NOUNS)
+    return f"{adjective} {noun} #{id}"
+
+def generate_price(id: int) -> str:
+    """
+    Generate a price for a product.
+    """
+    import random
+    random.seed(id)
+    price = random.randint(10, 100)
+    return f"${price}"
+
+
+def generate_description(id: int) -> str:
+    """
+    Generate a description for a product.
+    """
+    import random
+    random.seed(id)
+    
+    return random.choice(DESCRIPTIONS)
+
+def generate_product_by_id(id: int) -> dict:
+    """
+    Generate a product dictionary by ID.
+    """
+    return {
+        "id": id,
+        "name": generate_product_name(id),
+        "price": generate_price(id),
+        "description": generate_description(id),
+    }
+
+PRODUCTS = [
+    generate_product_by_id(i) for i in range(1, 101)
 ]
-
-
-def find_product_by_id(product_id):
-    return next((p for p in products if p["id"] == int(product_id)), None)

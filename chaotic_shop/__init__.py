@@ -117,6 +117,10 @@ def get(product_id: int):
     )
 
     if product:
+        next_id = core.next_product_id_in_category(product["category"], product_id)
+        previous_id = core.previous_product_id_in_category(
+            product["category"], product_id
+        )
         return Html(
             Head(Title(product["name"]), Style(CSS)),
             Body(
@@ -175,6 +179,21 @@ def get(product_id: int):
                                 action="/checkout",
                             ),
                             _class="container",
+                        ),
+                        Div(
+                            Div(
+                                A("Previous Product", href=f"/product/{previous_id}")
+                                if previous_id is not None
+                                else "",
+                                _class="navigation-left",
+                            ),
+                            Div(
+                                A("Next Product", href=f"/product/{next_id}")
+                                if next_id is not None
+                                else "",
+                                _class="navigation-right",
+                            ),
+                            _class="navigation",
                         ),
                         _class="main-content",
                     ),

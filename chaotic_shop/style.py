@@ -42,6 +42,17 @@ header nav {
     float: right;
     margin-top: 10px;
 }
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.navigation-left {
+    float: left;
+}
+.navigation-right {
+    float: right;
+}
 #showcase {
     min-height: 400px;
     background: url('showcase.jpg') no-repeat 0 -400px;

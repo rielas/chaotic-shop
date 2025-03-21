@@ -1,12 +1,11 @@
 from .names import ADJECTIVES, NOUNS, DESCRIPTIONS
 from typing import Generator
 
-NUMBER_OF_PRODUCTS = 100
+NUMBER_OF_PRODUCTS = 10000
 
 
 def get_category(id: int) -> str:
-    size = len(ADJECTIVES)
-    return ADJECTIVES[id % size]
+    return ADJECTIVES[id // len(NOUNS) % len(ADJECTIVES)]
 
 
 def generate_product_name(id: int) -> str:
@@ -17,7 +16,8 @@ def generate_product_name(id: int) -> str:
 
     random.seed(id)
     category = get_category(id)
-    noun = random.choice(NOUNS)
+    noun_size = len(NOUNS)
+    noun = NOUNS[id % noun_size]
     return f"{category} {noun} #{id}"
 
 
@@ -72,5 +72,6 @@ def product_generator() -> Generator[dict]:
 def get_products_by_category(category: str) -> Generator[dict]:
     index = ADJECTIVES.index(category)
 
-    for i in range(index, NUMBER_OF_PRODUCTS, len(ADJECTIVES)):
-        yield generate_product_by_id(i)
+    for i in range(0, NUMBER_OF_PRODUCTS):
+        if i // len(NOUNS) % len(ADJECTIVES) == index:
+            yield generate_product_by_id(i)

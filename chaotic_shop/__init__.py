@@ -248,7 +248,6 @@ def post(request: dict):
 
     print(f"Processing checkout for product {product_id}")
 
-    # Simulate processing delay
     time.sleep(4)
 
     return Html(

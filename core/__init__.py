@@ -75,3 +75,35 @@ def get_products_by_category(category: str) -> Generator[dict]:
     for i in range(0, NUMBER_OF_PRODUCTS):
         if i // len(NOUNS) % len(ADJECTIVES) == index:
             yield generate_product_by_id(i)
+
+
+def next_product_id_in_category(category: str, id: int) -> int | None:
+    """
+    Get the next product ID in the specified category.
+    """
+    if id < 0 or id >= NUMBER_OF_PRODUCTS - 1:
+        return None
+
+    index = ADJECTIVES.index(category)
+
+    for i in range(id + 1, NUMBER_OF_PRODUCTS):
+        if i // len(NOUNS) % len(ADJECTIVES) == index:
+            return i
+
+    return None
+
+
+def previous_product_id_in_category(category: str, id: int) -> int | None:
+    """
+    Get the previous product ID in the specified category.
+    """
+    if id < 0 or id > NUMBER_OF_PRODUCTS:
+        return None
+
+    index = ADJECTIVES.index(category)
+
+    for i in range(id - 1, -1, -1):
+        if i // len(NOUNS) % len(ADJECTIVES) == index:
+            return i
+
+    return None

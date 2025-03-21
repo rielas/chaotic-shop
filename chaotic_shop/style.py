@@ -84,4 +84,19 @@ header nav {
 .product a:hover, .category a:hover {
     background: #77aaff;
 }
+.sidebar-container {
+    float: left;
+    width: 20%;
+}
+.sidebar {
+    background: #fff;
+    padding: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.main-content {
+    float: left;
+    width: 75%;
+}
 """

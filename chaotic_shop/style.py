@@ -22,6 +22,11 @@ header a {
     text-decoration: none;
     text-transform: uppercase;
     font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+header a:hover {
+    background-color: darkred;
 }
 header ul {
     padding: 0;
@@ -52,6 +57,15 @@ header nav {
 }
 .navigation-right {
     float: right;
+}
+.navigation-left a, .navigation-right a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+}
+.navigation-left a:hover, .navigation-right a:hover {
+    background-color: darkred;
 }
 #showcase {
     min-height: 400px;

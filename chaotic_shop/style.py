@@ -68,6 +68,16 @@ header nav {
 .navigation-left a:hover, .navigation-right a:hover {
     background-color: darkred;
 }
+.navigation-button {
+    background: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+}
+.navigation-button:hover {
+    background-color: darkred;
+}
 #showcase {
     min-height: 400px;
     background: url('showcase.jpg') no-repeat 0 -400px;

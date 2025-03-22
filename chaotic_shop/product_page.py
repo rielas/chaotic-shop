@@ -27,7 +27,7 @@ def product_page(product_id: int):
     categories = core.ADJECTIVES
     product = core.generate_product_by_id(product_id)
     category = product["category"]
-    skeleton = Skeleton(chaos_degree=3, category=category)
+    skeleton = Skeleton(chaos_degree=1, category=category)
     elements = skeleton.get_elements()
     category_list = Div(
         *[Li(A(category, href=f"/category/{category}")) for category in categories],
@@ -45,7 +45,12 @@ def product_page(product_id: int):
             if element == "description":
                 content.append(P(product["description"]))
             elif element == "back_to_products":
-                content.append(A("Back to products", href="/"))
+                content.append(
+                    Div(
+                        A("Back to products", href="/", _class="navigation-button"),
+                        _class="navigation",
+                    )
+                )
             elif element == "leave_review":
                 content.append(
                     Div(

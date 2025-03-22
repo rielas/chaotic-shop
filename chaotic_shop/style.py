@@ -59,6 +59,7 @@ header nav {
     float: right;
 }
 .navigation-left a, .navigation-right a {
+    background: #333;
     padding: 10px 20px;
     border-radius: 5px;
     color: #fff;

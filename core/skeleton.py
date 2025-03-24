@@ -52,7 +52,23 @@ class AddLeaveReviewId:
         return f"{self.category.lower()}_{random}"
 
 
-Mutation = Reorder | AddDescriptionId | AddBackToProductsId | AddLeaveReviewId
+@dataclass
+class AddCheckoutId:
+    step: int
+    category: str
+
+    def get_id(self) -> str:
+        """
+        Get id for checkout section.
+        """
+        category_index = core.ADJECTIVES.index(self.category)
+        random = random_based_on_seed(category_index * 1000, 1000)
+        return f"{self.category.lower()}_{random}"
+
+
+Mutation = (
+    Reorder | AddDescriptionId | AddBackToProductsId | AddLeaveReviewId | AddCheckoutId
+)
 
 
 def choose_mutation(step: int, category: str) -> Mutation:
@@ -73,6 +89,8 @@ def choose_mutation(step: int, category: str) -> Mutation:
             return AddBackToProductsId(step, category)
         case 3:
             return AddLeaveReviewId(step, category)
+        case 4:
+            return AddCheckoutId(step, category)
         case _:
             raise ValueError(f"Invalid mutation type: {mutation}")
 
@@ -124,6 +142,7 @@ class Skeleton:
         self.description_id = None
         self.back_to_products_id = None
         self.leave_review_id = None
+        self.checkout_id = None
         self._apply_mutation()
 
     def _apply_mutation(self):
@@ -137,3 +156,5 @@ class Skeleton:
                     self.back_to_products_id = mutation.get_id()
                 case AddLeaveReviewId(step, _):
                     self.leave_review_id = mutation.get_id()
+                case AddCheckoutId(step, _):
+                    self.checkout_id = mutation.get_id()

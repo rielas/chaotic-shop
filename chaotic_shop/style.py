@@ -144,4 +144,7 @@ div.navigation[id] {
 div.leave-review-id[id] {
     background-color: #A6E1C5;
 }
+div.checkout[id] {
+    background-color: #A7E0F6;
+}
 """

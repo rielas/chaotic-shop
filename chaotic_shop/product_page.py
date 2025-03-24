@@ -56,9 +56,11 @@ def product_page(product_id: int):
                     Div(
                         A("Back to products", href="/", _class="navigation-button"),
                         _class="navigation",
-                        id=skeleton.back_to_products_id
-                        if skeleton.back_to_products_id
-                        else None,
+                        id=(
+                            skeleton.back_to_products_id
+                            if skeleton.back_to_products_id
+                            else None
+                        ),
                     )
                 )
             elif element == "leave_review":
@@ -79,9 +81,11 @@ def product_page(product_id: int):
                             action="/submit_review",
                         ),
                         _class="leave-review-id container",
-                        id=skeleton.leave_review_id
-                        if skeleton.leave_review_id
-                        else None,
+                        id=(
+                            skeleton.leave_review_id
+                            if skeleton.leave_review_id
+                            else None
+                        ),
                     )
                 )
             elif element == "checkout":
@@ -94,22 +98,27 @@ def product_page(product_id: int):
                             method="post",
                             action="/checkout",
                         ),
-                        _class="container",
+                        _class="container checkout",
+                        id=skeleton.checkout_id if skeleton.checkout_id else None,
                     )
                 )
             elif element == "navigation":
                 content.append(
                     Div(
                         Div(
-                            A("Previous Product", href=f"/product/{previous_id}")
-                            if previous_id is not None
-                            else "",
+                            (
+                                A("Previous Product", href=f"/product/{previous_id}")
+                                if previous_id is not None
+                                else ""
+                            ),
                             _class="navigation-left",
                         ),
                         Div(
-                            A("Next Product", href=f"/product/{next_id}")
-                            if next_id is not None
-                            else "",
+                            (
+                                A("Next Product", href=f"/product/{next_id}")
+                                if next_id is not None
+                                else ""
+                            ),
                             _class="navigation-right",
                         ),
                         _class="navigation",

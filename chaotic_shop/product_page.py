@@ -56,6 +56,9 @@ def product_page(product_id: int):
                     Div(
                         A("Back to products", href="/", _class="navigation-button"),
                         _class="navigation",
+                        id=skeleton.back_to_products_id
+                        if skeleton.back_to_products_id
+                        else None,
                     )
                 )
             elif element == "leave_review":
@@ -75,7 +78,10 @@ def product_page(product_id: int):
                             method="post",
                             action="/submit_review",
                         ),
-                        _class="container",
+                        _class="leave-review-id container",
+                        id=skeleton.leave_review_id
+                        if skeleton.leave_review_id
+                        else None,
                     )
                 )
             elif element == "checkout":

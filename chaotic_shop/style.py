@@ -136,6 +136,12 @@ header nav {
     width: 75%;
 }
 p.product-description[id] {
-    background-color: #F5F5DC;
+    background-color: #FF9FAE;
+}
+div.navigation[id] {
+    background-color: #FDE995;
+}
+div.leave-review-id[id] {
+    background-color: #A6E1C5;
 }
 """

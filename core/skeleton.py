@@ -24,7 +24,35 @@ class AddDescriptionId:
         return f"{self.category.lower()}_{random}"
 
 
-Mutation = Reorder | AddDescriptionId
+@dataclass
+class AddBackToProductsId:
+    step: int
+    category: str
+
+    def get_id(self) -> str:
+        """
+        Get id for back_to_products section.
+        """
+        category_index = core.ADJECTIVES.index(self.category)
+        random = random_based_on_seed(category_index * 1000, 1000)
+        return f"{self.category.lower()}_{random}"
+
+
+@dataclass
+class AddLeaveReviewId:
+    step: int
+    category: str
+
+    def get_id(self) -> str:
+        """
+        Get id for leave_review section.
+        """
+        category_index = core.ADJECTIVES.index(self.category)
+        random = random_based_on_seed(category_index * 1000, 1000)
+        return f"{self.category.lower()}_{random}"
+
+
+Mutation = Reorder | AddDescriptionId | AddBackToProductsId | AddLeaveReviewId
 
 
 def choose_mutation(step: int, category: str) -> Mutation:
@@ -41,6 +69,10 @@ def choose_mutation(step: int, category: str) -> Mutation:
             return AddDescriptionId(step, category)
         case 1:
             return Reorder(step)
+        case 2:
+            return AddBackToProductsId(step, category)
+        case 3:
+            return AddLeaveReviewId(step, category)
         case _:
             raise ValueError(f"Invalid mutation type: {mutation}")
 
@@ -90,6 +122,8 @@ class Skeleton:
         self.category = category
         self.sections = SECTIONS
         self.description_id = None
+        self.back_to_products_id = None
+        self.leave_review_id = None
         self._apply_mutation()
 
     def _apply_mutation(self):
@@ -99,3 +133,7 @@ class Skeleton:
                     self.sections = make_random_move(step, self.sections, self.category)
                 case AddDescriptionId(step, _):
                     self.description_id = mutation.get_id()
+                case AddBackToProductsId(step, _):
+                    self.back_to_products_id = mutation.get_id()
+                case AddLeaveReviewId(step, _):
+                    self.leave_review_id = mutation.get_id()

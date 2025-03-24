@@ -24,7 +24,7 @@ import time
 app, rt = fast_app()
 
 
-CHAOS_DEGREE = 1
+CHAOS_DEGREE = 2
 
 
 @rt("/")

@@ -135,4 +135,7 @@ header nav {
     float: left;
     width: 75%;
 }
+p.product-description[id] {
+    background-color: #F5F5DC;
+}
 """

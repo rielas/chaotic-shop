@@ -21,14 +21,15 @@ from fasthtml.common import (
 import core
 from core.skeleton import Skeleton
 from chaotic_shop.style import CSS
+import chaotic_shop
 
 
 def product_page(product_id: int):
     categories = core.ADJECTIVES
     product = core.generate_product_by_id(product_id)
     category = product["category"]
-    skeleton = Skeleton(chaos_degree=1, category=category)
-    elements = skeleton.get_elements()
+    skeleton = Skeleton(chaos_degree=chaotic_shop.CHAOS_DEGREE, category=category)
+    elements = skeleton.sections
     category_list = Div(
         *[Li(A(category, href=f"/category/{category}")) for category in categories],
         _class="sidebar",
@@ -43,7 +44,13 @@ def product_page(product_id: int):
         content = []
         for element in elements:
             if element == "description":
-                content.append(P(product["description"]))
+                content.append(
+                    P(
+                        product["description"],
+                        _class="product-description",
+                        id=skeleton.description_id if skeleton.description_id else None,
+                    )
+                )
             elif element == "back_to_products":
                 content.append(
                     Div(

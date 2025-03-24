@@ -8,10 +8,6 @@ from fasthtml.common import (
     H2,
     P,
     A,
-    Form,
-    Input,
-    Textarea,
-    Label,
     fast_app,
     Style,
     Header,
@@ -26,6 +22,9 @@ from chaotic_shop.product_page import product_page
 import time
 
 app, rt = fast_app()
+
+
+CHAOS_DEGREE = 1
 
 
 @rt("/")

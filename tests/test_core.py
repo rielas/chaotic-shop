@@ -14,7 +14,7 @@ def test_find_product_by_id():
 
 def test_find_product_by_id_not_found():
     product = core.generate_product_by_id(999)
-    assert product["name"] == "Lightweight Tool #999"
+    assert product["name"] == "Efficient Hub #999"
 
 
 def test_get_products_by_category():

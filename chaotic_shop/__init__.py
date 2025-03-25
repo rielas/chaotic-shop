@@ -8,27 +8,38 @@ from fasthtml.common import (
     H2,
     P,
     A,
-    fast_app,
-    Style,
     Header,
     Nav,
+    Link,
     Ul,
     Li,
     serve,
+    fast_app,
+    Titled,
+    Main,
 )
 import core
-from chaotic_shop.style import CSS
 from chaotic_shop.product_page import product_page
 import time
 
-app, rt = fast_app()
-
+app, rt = fast_app(
+    hdrs=(
+        (),
+        Link(
+            rel="stylesheet",
+            href="/assets/styles.css",
+            type="text/css",
+        ),
+    ),
+    pico=True,
+    static_path="public",
+)
 
 CHAOS_DEGREE = 2
 
 
-@rt("/")
-def get():
+@app.get("/")
+def home():
     categories = core.ADJECTIVES
     category_list = Div(
         *[
@@ -41,9 +52,9 @@ def get():
         ],
         _id="categories",
     )
-    return Html(
-        Head(Title("Chaotic Shop"), Style(CSS)),
-        Body(
+    return Titled(
+        "Chaotic Shop",
+        Main(
             Div(
                 Header(
                     Div(H1("Chaotic Shop"), _id="branding"),
@@ -61,8 +72,8 @@ def get():
     )
 
 
-@rt("/category/{category}")
-def get(category: str):
+@app.get("/category/{category}")
+def category(category: str):
     categories = core.ADJECTIVES
     products = core.get_products_by_category(category)
     category_list = Div(
@@ -83,9 +94,9 @@ def get(category: str):
         ],
         _id="products",
     )
-    return Html(
-        Head(Title(f"Products in {category}"), Style(CSS)),
-        Body(
+    return Titled(
+        f"Products in {category}",
+        Main(
             Div(
                 Header(
                     Div(H1("Chaotic Shop"), _id="branding"),
@@ -122,9 +133,9 @@ def post(request: dict):
 
     time.sleep(4)
 
-    return Html(
-        Head(Title("Review Submitted"), Style(CSS)),
-        Body(
+    return Titled(
+        "Review Submitted",
+        Main(
             Div(
                 Header(
                     Div(H1("Chaotic Shop"), _id="branding"),
@@ -155,9 +166,9 @@ def post(request: dict):
 
     time.sleep(4)
 
-    return Html(
-        Head(Title("Checkout Complete"), Style(CSS)),
-        Body(
+    return Titled(
+        "Checkout Complete",
+        Main(
             Div(
                 Header(
                     Div(H1("Chaotic Shop"), _id="branding"),

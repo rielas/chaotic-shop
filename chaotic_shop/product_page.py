@@ -2,6 +2,9 @@ from fasthtml.common import (
     Html,
     Head,
     Title,
+    Titled,
+    Main,
+    Img,
     Body,
     Div,
     H1,
@@ -20,7 +23,6 @@ from fasthtml.common import (
 )
 import core
 from core.skeleton import Skeleton
-from chaotic_shop.style import CSS
 import chaotic_shop
 
 
@@ -125,9 +127,9 @@ def product_page(product_id: int):
                     )
                 )
 
-        return Html(
-            Head(Title(product["name"]), Style(CSS)),
-            Body(
+        return Titled(
+            product["name"],
+            Main(
                 Div(
                     Header(
                         Div(H1("Chaotic Shop"), _id="branding"),
@@ -144,6 +146,7 @@ def product_page(product_id: int):
                     Div(category_list, _class="sidebar-container"),
                     Div(
                         H1(product["name"]),
+                        Img(src="https://placehold.co/200"),
                         P(product["price"]),
                         P(product["category"]),
                         *content,
@@ -154,9 +157,9 @@ def product_page(product_id: int):
             ),
         )
     else:
-        return Html(
-            Head(Title("Product not found"), Style(CSS)),
-            Body(
+        return Titled(
+            "Product not found",
+            Main(
                 Div(
                     Header(
                         Div(H1("Chaotic Shop"), _id="branding"),

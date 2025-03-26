@@ -107,6 +107,8 @@ def category(category: str):
                 P(f"Explore our wide range of {category} products."),
                 product_list,
                 _class="container",
+                _id="content",
+                role="document",
             ),
             _class="container",
         ),

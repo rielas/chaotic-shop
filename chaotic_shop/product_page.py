@@ -1,5 +1,5 @@
 from fasthtml.common import (
-    Titled,
+    Title,
     Main,
     Img,
     Div,
@@ -11,10 +11,11 @@ from fasthtml.common import (
     Input,
     Textarea,
     Label,
-    Header,
     Nav,
     Ul,
     Li,
+    Aside,
+    Section,
 )
 import core
 from core.skeleton import Skeleton
@@ -27,8 +28,8 @@ def product_page(product_id: int):
     category = product["category"]
     skeleton = Skeleton(chaos_degree=chaotic_shop.CHAOS_DEGREE, category=category)
     elements = skeleton.sections
-    category_list = Div(
-        *[Li(A(category, href=f"/category/{category}")) for category in categories],
+    category_list = Nav(
+        Ul(*[Li(A(category, href=f"/category/{category}")) for category in categories]),
         _class="sidebar",
     )
 
@@ -122,49 +123,33 @@ def product_page(product_id: int):
                     )
                 )
 
-        return Titled(
-            product["name"],
+        return (
+            Title(product["name"]),
             Main(
                 Div(
-                    Header(
-                        Div(H1("Chaotic Shop"), _id="branding"),
-                        Nav(
-                            Ul(
-                                Li(A("Home", href="/")),
-                                Li(A("Products", href="/")),
-                            )
-                        ),
-                    ),
+                    chaotic_shop.navigation(),
                     _class="container",
                 ),
                 Div(
-                    Div(category_list, _class="sidebar-container"),
-                    Div(
+                    Aside(category_list),
+                    Section(
                         H1(product["name"]),
-                        Img(src="https://placehold.co/200"),
+                        Img(src="https://placehold.co/300"),
                         P(product["price"]),
                         P(product["category"]),
                         *content,
                         _class="main-content",
                     ),
-                    _class="container",
+                    _class="container content-wrapper",
                 ),
             ),
         )
     else:
-        return Titled(
-            "Product not found",
+        return (
+            Title("Product not found"),
             Main(
                 Div(
-                    Header(
-                        Div(H1("Chaotic Shop"), _id="branding"),
-                        Nav(
-                            Ul(
-                                Li(A("Home", href="/")),
-                                Li(A("Products", href="/")),
-                            )
-                        ),
-                    ),
+                    chaotic_shop.navigation(),
                     _class="container",
                 ),
                 Div(

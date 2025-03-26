@@ -138,7 +138,7 @@ def product_page(product_id: int):
                         P(product["price"]),
                         P(product["category"]),
                         *content,
-                        _class="main-content",
+                        _class="main-content centered",
                     ),
                     _class="container content-wrapper",
                 ),

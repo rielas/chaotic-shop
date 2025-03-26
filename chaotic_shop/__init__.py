@@ -4,6 +4,7 @@ from fasthtml.common import (
     Strong,
     Img,
     Button,
+    Section,
     Div,
     H1,
     P,
@@ -101,14 +102,17 @@ def category(category: str):
         Title(f"Products in {category}"),
         Main(
             navigation(),
-            Aside(category_list),
-            Div(
-                H1(f"Products in {category}"),
-                P(f"Explore our wide range of {category} products."),
-                product_list,
-                _class="container",
-                _id="content",
-                role="document",
+            Main(
+                Aside(category_list),
+                Section(
+                    H1(f"Products in {category}"),
+                    P(f"Explore our wide range of {category} products."),
+                    product_list,
+                    _class="container",
+                    _id="content",
+                    role="document",
+                ),
+                _class="content-wrapper",
             ),
             _class="container",
         ),

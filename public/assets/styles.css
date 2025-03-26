@@ -3,3 +3,16 @@
     grid-template-columns: repeat(3, 1fr); /* Limit to 3 columns */
     gap: 1rem;
 }
+
+.content-wrapper {
+    display: flex;
+}
+
+.sidebar {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+#content {
+    flex: 3;
+}

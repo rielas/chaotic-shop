@@ -28,6 +28,15 @@
 p.product-description {
     margin: 1rem;
     padding: 1rem;
+    position: relative;
+}
+
+p.product-description::before {
+    content: "3️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
 }
 
 p.product-description[id] {
@@ -37,6 +46,15 @@ p.product-description[id] {
 div.navigation {
     margin: 1rem;
     padding: 1rem;
+    position: relative;
+}
+
+div.navigation::before {
+    content: "7️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
 }
 
 div.navigation[id] {
@@ -46,6 +64,15 @@ div.navigation[id] {
 nav.navigation {
     margin: 1rem;
     padding: 1rem;
+    position: relative;
+}
+
+nav.navigation::before {
+    content: "7️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
 }
 
 nav.navigation[id] {
@@ -55,6 +82,15 @@ nav.navigation[id] {
 div.leave-review {
     margin: 1rem;
     padding: 1rem;
+    position: relative;
+}
+
+div.leave-review::before {
+    content: "5️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
 }
 
 div.leave-review[id] {
@@ -64,10 +100,37 @@ div.leave-review[id] {
 div.checkout {
     margin: 1rem;
     padding: 1rem;
+    position: relative;
+}
+
+div.checkout::before {
+    content: "4️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
 }
 
 div.checkout[id] {
     background-color: rgba(167, 224, 246, 0.3);
+}
+
+div.back-to-products {
+    margin: 1rem;
+    padding: 1rem;
+    position: relative;
+}
+
+div.back-to-products::before {
+    content: "6️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+}
+
+div.back-to-products[id] {
+    background-color: rgba(253, 233, 149, 0.3);
 }
 
 .product-price {
@@ -75,6 +138,15 @@ div.checkout[id] {
     color: #333;
     margin: 10px 0;
     padding: 1rem;
+    position: relative;
+}
+
+.product-price::before {
+    content: "2️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
 }
 
 .product-price[id] {
@@ -87,6 +159,15 @@ div.checkout[id] {
     display: block;
     margin: 20px 0;
     padding: 1rem;
+    position: relative;
+}
+
+.product-image::before {
+    content: "1️⃣";
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
 }
 
 .product-image[id] {

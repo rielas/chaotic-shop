@@ -3,13 +3,13 @@ import random
 import core
 
 SECTIONS = [
-    "description",
-    "back_to_products",
-    "leave_review",
-    "checkout",
-    "navigation",
-    "price",
     "image",
+    "price",
+    "description",
+    "checkout",
+    "leave_review",
+    "back_to_products",
+    "navigation",
 ]
 
 
@@ -135,27 +135,25 @@ def choose_mutation(step: int, category: str) -> Mutation:
     category_index = core.ADJECTIVES.index(category)
 
     mutation = random_based_on_seed(
-        category_index * 1000 + step, len(Mutation.__args__)
+        category_index * 1000 + step, len(Mutation.__args__) + 3
     )
     match mutation:
         case 0:
             return AddDescriptionId(step, category)
         case 1:
-            return Reorder(step)
-        case 2:
             return AddBackToProductsId(step, category)
-        case 3:
+        case 2:
             return AddLeaveReviewId(step, category)
-        case 4:
+        case 3:
             return AddCheckoutId(step, category)
-        case 5:
+        case 4:
             return AddNavigationId(step, category)
-        case 6:
+        case 5:
             return AddPriceId(step, category)
-        case 7:
+        case 6:
             return AddImageId(step, category)
         case _:
-            raise ValueError(f"Invalid mutation type: {mutation}")
+            return Reorder(step)
 
 
 def generate_mutations(chaos_degree: int, category: str) -> list[Mutation]:

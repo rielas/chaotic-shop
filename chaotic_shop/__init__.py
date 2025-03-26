@@ -37,7 +37,7 @@ app, rt = fast_app(
     static_path="public",
 )
 
-CHAOS_DEGREE = 3
+CHAOS_DEGREE = 5
 
 
 def navigation():

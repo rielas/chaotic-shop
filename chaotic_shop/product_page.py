@@ -54,7 +54,7 @@ def product_page(product_id: int):
                 content.append(
                     Div(
                         A("Back to products", href="/", _class="navigation-button"),
-                        _class="navigation",
+                        _class="back-to-products",
                         id=(
                             skeleton.back_to_products_id
                             if skeleton.back_to_products_id

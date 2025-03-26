@@ -1,11 +1,7 @@
 from fasthtml.common import (
-    Html,
-    Head,
-    Title,
     Titled,
     Main,
     Img,
-    Body,
     Div,
     H1,
     H2,
@@ -19,7 +15,6 @@ from fasthtml.common import (
     Nav,
     Ul,
     Li,
-    Style,
 )
 import core
 from core.skeleton import Skeleton

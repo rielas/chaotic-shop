@@ -1,4 +1,4 @@
-from .names import ADJECTIVES, NOUNS, DESCRIPTIONS
+from .names import ADJECTIVES, NOUNS, DESCRIPTIONS, CATEGORIES_DESCRIPTIONS
 from typing import Generator
 
 NUMBER_OF_PRODUCTS = 10000

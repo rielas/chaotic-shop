@@ -1,4 +1,3 @@
-import pytest
 import core.skeleton as skeleton
 import core
 from core.skeleton import Skeleton, SECTIONS, choose_mutation, Reorder, AddDescriptionId

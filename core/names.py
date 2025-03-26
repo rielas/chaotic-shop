@@ -1,6 +1,3 @@
-# For generation product names
-# such as Useful Tool, Advanced Widget, etc.
-
 ADJECTIVES = [
     "Advanced",
     "Basic",
@@ -17,6 +14,24 @@ ADJECTIVES = [
     "Sophisticated",
     "Streamlined",
     "Versatile",
+]
+
+CATEGORIES_DESCRIPTIONS = [
+    "Featuring the latest technology and design for superior performance. Ideal for tech enthusiasts.",
+    "Simple and easy to use, perfect for everyday tasks. Great for beginners.",
+    "Small in size but big on functionality, ideal for limited spaces. Perfect for compact living.",
+    "Built to last with high-quality materials and construction. Suitable for rugged use.",
+    "Optimized for maximum productivity and minimal waste. Excellent for efficiency seekers.",
+    "Designed for comfort and ease of use, reducing strain. Perfect for long-term use.",
+    "Cutting-edge features and design for modern needs. Ideal for innovators.",
+    "Easy to carry and handle, without sacrificing performance. Great for travelers.",
+    "Convenient to transport, perfect for on-the-go use. Suitable for mobile professionals.",
+    "Strong and reliable, capable of handling tough conditions. Perfect for heavy-duty tasks.",
+    "Intelligent features that make tasks easier and more efficient. Ideal for smart homes.",
+    "Stylish and modern design that looks great anywhere. Perfect for fashion-conscious users.",
+    "Elegant and refined, with advanced capabilities. Suitable for sophisticated tastes.",
+    "Smooth and efficient design for optimal performance. Great for streamlined operations.",
+    "Adaptable to a wide range of tasks and situations. Perfect for versatile applications.",
 ]
 
 NOUNS = [

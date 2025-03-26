@@ -1,12 +1,13 @@
 from fasthtml.common import (
-    Html,
-    Head,
     Title,
-    Body,
+    Strong,
+    Img,
+    Button,
     Div,
     H1,
     H2,
     P,
+    Article,
     A,
     Header,
     Nav,
@@ -41,34 +42,31 @@ CHAOS_DEGREE = 2
 @app.get("/")
 def home():
     categories = core.ADJECTIVES
+    descriptions = core.CATEGORIES_DESCRIPTIONS
     category_list = Div(
         *[
-            Div(
-                H2(category),
-                A("View Products", href=f"/category/{category}"),
-                _class="category",
+            Article(
+                Header(category),
+                Img(src="https://placehold.co/200"),
+                P(descriptions[i]),
+                P(A(f"View {category}", href=f"/category/{category}")),
             )
-            for category in categories
+            for i, category in enumerate(categories)
         ],
-        _id="categories",
+        _class="grid limited-grid",
     )
-    return Titled(
-        "Chaotic Shop",
-        Main(
-            Div(
-                Header(
-                    Div(H1("Chaotic Shop"), _id="branding"),
-                    Nav(
-                        Ul(
-                            Li(A("Home", href="/")),
-                            Li(A("Products", href="/")),
-                        )
-                    ),
+    return (
+        Title("Chaotic Shop"),
+        Header(
+            Nav(
+                Ul(Li(Strong("Chaotic Shop"))),
+                Ul(
+                    Li(Button("Home", href="/")),
+                    Li(Button("Products", href="/")),
                 ),
-                _class="container",
             ),
-            Div(H1("Welcome to Chaotic Shop!"), category_list, _class="container"),
         ),
+        Main(category_list),
     )
 
 
@@ -88,30 +86,36 @@ def category(category: str):
                 P(product["price"]),
                 P(product["category"]),
                 A("View", href=f"/product/{product['id']}"),
-                _class="product",
+                _class="grid",
             )
             for product in products
         ],
         _id="products",
+        _class="grid limited-grid",  # Apply the new CSS class
     )
-    return Titled(
-        f"Products in {category}",
-        Main(
-            Div(
-                Header(
-                    Div(H1("Chaotic Shop"), _id="branding"),
-                    Nav(
+    return (
+        Titled(
+            f"Products in {category}",
+            Main(
+                Div(
+                    Header(
+                        Nav(Ul(Li(Strong("Chaotic Shop")))),
                         Ul(
                             Li(A("Home", href="/")),
                             Li(A("Products", href="/")),
-                        )
+                        ),
                     ),
                 ),
                 _class="container",
             ),
             Div(
-                Div(category_list, _class="sidebar-container"),
-                Div(H1(f"Products in {category}"), product_list, _class="main-content"),
+                Div(category_list, _class="sidebar"),
+                Div(
+                    H1(f"Products in {category}"),
+                    P(f"Explore our wide range of {category} products."),
+                    product_list,
+                    _class="container",
+                ),
                 _class="container",
             ),
         ),
@@ -159,7 +163,7 @@ def post(request: dict):
 
 
 @rt("/checkout", methods=["POST"])
-def post(request: dict):
+def checkout(request: dict):
     product_id = request.get("product_id")
 
     print(f"Processing checkout for product {product_id}")

@@ -1,11 +1,11 @@
 from fasthtml.common import (
     Title,
+    Aside,
     Strong,
     Img,
     Button,
     Div,
     H1,
-    H2,
     P,
     Article,
     A,
@@ -78,8 +78,8 @@ def home():
 def category(category: str):
     categories = core.ADJECTIVES
     products = core.get_products_by_category(category)
-    category_list = Div(
-        *[Li(A(category, href=f"/category/{category}")) for category in categories],
+    category_list = Nav(
+        Ul(*[Li(A(category, href=f"/category/{category}")) for category in categories]),
         _class="sidebar",
     )
     product_list = Div(
@@ -90,23 +90,18 @@ def category(category: str):
                 P(product["description"]),
                 P(product["price"]),
                 P(product["category"]),
-                A("View", href=f"/product/{product['id']}")
+                A("View", href=f"/product/{product['id']}"),
             )
             for product in products
         ],
         _id="products",
-        _class="grid limited-grid",  # Apply the new CSS class
+        _class="grid limited-grid",
     )
     return (
         Title(f"Products in {category}"),
         Main(
-            Div(
-                navigation(),
-            ),
-            _class="container",
-        ),
-        Div(
-            Div(category_list, _class="sidebar"),
+            navigation(),
+            Aside(category_list),
             Div(
                 H1(f"Products in {category}"),
                 P(f"Explore our wide range of {category} products."),

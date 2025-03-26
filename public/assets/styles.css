@@ -37,6 +37,12 @@ div.navigation[id] {
     padding: 1rem;
 }
 
+nav.navigation[id] {
+    background-color: rgba(253, 233, 149, 0.3);
+    margin: 1rem;
+    padding: 1rem;
+}
+
 div.leave-review[id] {
     background-color: rgba(166, 225, 197, 0.3);
     margin: 1rem;

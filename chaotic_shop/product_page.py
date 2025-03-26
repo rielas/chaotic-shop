@@ -89,7 +89,6 @@ def product_page(product_id: int):
             elif element == "checkout":
                 content.append(
                     Div(
-                        H2("Checkout"),
                         Form(
                             Input(type="hidden", name="product_id", value=product_id),
                             Div(Input(type="submit", value="Checkout")),
@@ -124,7 +123,9 @@ def product_page(product_id: int):
                                 _class="navigation-right",
                             ),
                             _class="navigation-previous-next",
-                        )
+                        ),
+                        _class="navigation",
+                        id=skeleton.navigation_id if skeleton.navigation_id else None,
                     )
                 )
 

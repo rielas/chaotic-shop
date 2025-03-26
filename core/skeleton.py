@@ -81,7 +81,12 @@ class AddNavigationId:
 
 
 Mutation = (
-    Reorder | AddDescriptionId | AddBackToProductsId | AddLeaveReviewId | AddCheckoutId | AddNavigationId
+    Reorder
+    | AddDescriptionId
+    | AddBackToProductsId
+    | AddLeaveReviewId
+    | AddCheckoutId
+    | AddNavigationId
 )
 
 
@@ -159,6 +164,7 @@ class Skeleton:
         self.back_to_products_id = None
         self.leave_review_id = None
         self.checkout_id = None
+        self.navigation_id = None
         self._apply_mutation()
 
     def _apply_mutation(self):

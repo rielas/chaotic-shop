@@ -39,6 +39,18 @@ app, rt = fast_app(
 CHAOS_DEGREE = 2
 
 
+def navigation():
+    return Header(
+        Nav(
+            Ul(Li(Strong("Chaotic Shop"))),
+            Ul(
+                Li(Button("Home", href="/")),
+                Li(Button("Products", href="/")),
+            ),
+        ),
+    )
+
+
 @app.get("/")
 def home():
     categories = core.ADJECTIVES
@@ -57,15 +69,7 @@ def home():
     )
     return (
         Title("Chaotic Shop"),
-        Header(
-            Nav(
-                Ul(Li(Strong("Chaotic Shop"))),
-                Ul(
-                    Li(Button("Home", href="/")),
-                    Li(Button("Products", href="/")),
-                ),
-            ),
-        ),
+        navigation(),
         Main(category_list),
     )
 
@@ -94,30 +98,22 @@ def category(category: str):
         _class="grid limited-grid",  # Apply the new CSS class
     )
     return (
-        Titled(
-            f"Products in {category}",
-            Main(
-                Div(
-                    Header(
-                        Nav(Ul(Li(Strong("Chaotic Shop")))),
-                        Ul(
-                            Li(A("Home", href="/")),
-                            Li(A("Products", href="/")),
-                        ),
-                    ),
-                ),
-                _class="container",
-            ),
+        Title(f"Products in {category}"),
+        Main(
             Div(
-                Div(category_list, _class="sidebar"),
-                Div(
-                    H1(f"Products in {category}"),
-                    P(f"Explore our wide range of {category} products."),
-                    product_list,
-                    _class="container",
-                ),
+                navigation(),
+            ),
+            _class="container",
+        ),
+        Div(
+            Div(category_list, _class="sidebar"),
+            Div(
+                H1(f"Products in {category}"),
+                P(f"Explore our wide range of {category} products."),
+                product_list,
                 _class="container",
             ),
+            _class="container",
         ),
     )
 
@@ -141,15 +137,7 @@ def post(request: dict):
         "Review Submitted",
         Main(
             Div(
-                Header(
-                    Div(H1("Chaotic Shop"), _id="branding"),
-                    Nav(
-                        Ul(
-                            Li(A("Home", href="/")),
-                            Li(A("Products", href="/")),
-                        )
-                    ),
-                ),
+                navigation(),
                 _class="container",
             ),
             Div(
@@ -174,15 +162,7 @@ def checkout(request: dict):
         "Checkout Complete",
         Main(
             Div(
-                Header(
-                    Div(H1("Chaotic Shop"), _id="branding"),
-                    Nav(
-                        Ul(
-                            Li(A("Home", href="/")),
-                            Li(A("Products", href="/")),
-                        )
-                    ),
-                ),
+                navigation(),
                 _class="container",
             ),
             Div(

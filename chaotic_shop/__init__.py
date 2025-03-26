@@ -84,13 +84,13 @@ def category(category: str):
     )
     product_list = Div(
         *[
-            Div(
-                H2(product["name"]),
+            Article(
+                Header(product["name"]),
+                Img(src="https://placehold.co/200"),
                 P(product["description"]),
                 P(product["price"]),
                 P(product["category"]),
-                A("View", href=f"/product/{product['id']}"),
-                _class="grid",
+                A("View", href=f"/product/{product['id']}")
             )
             for product in products
         ],

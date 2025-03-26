@@ -2,7 +2,15 @@ from dataclasses import dataclass
 import random
 import core
 
-SECTIONS = ["description", "back_to_products", "leave_review", "checkout", "navigation"]
+SECTIONS = [
+    "description",
+    "back_to_products",
+    "leave_review",
+    "checkout",
+    "navigation",
+    "price",
+    "image",
+]
 
 
 @dataclass
@@ -80,6 +88,34 @@ class AddNavigationId:
         return f"{self.category.lower()}_{random}"
 
 
+@dataclass
+class AddPriceId:
+    step: int
+    category: str
+
+    def get_id(self) -> str:
+        """
+        Get id for price section.
+        """
+        category_index = core.ADJECTIVES.index(self.category)
+        random = random_based_on_seed(category_index * 1000, 1000)
+        return f"{self.category.lower()}_{random}"
+
+
+@dataclass
+class AddImageId:
+    step: int
+    category: str
+
+    def get_id(self) -> str:
+        """
+        Get id for image section.
+        """
+        category_index = core.ADJECTIVES.index(self.category)
+        random = random_based_on_seed(category_index * 1000, 1000)
+        return f"{self.category.lower()}_{random}"
+
+
 Mutation = (
     Reorder
     | AddDescriptionId
@@ -87,6 +123,8 @@ Mutation = (
     | AddLeaveReviewId
     | AddCheckoutId
     | AddNavigationId
+    | AddPriceId
+    | AddImageId
 )
 
 
@@ -112,6 +150,10 @@ def choose_mutation(step: int, category: str) -> Mutation:
             return AddCheckoutId(step, category)
         case 5:
             return AddNavigationId(step, category)
+        case 6:
+            return AddPriceId(step, category)
+        case 7:
+            return AddImageId(step, category)
         case _:
             raise ValueError(f"Invalid mutation type: {mutation}")
 
@@ -165,6 +207,8 @@ class Skeleton:
         self.leave_review_id = None
         self.checkout_id = None
         self.navigation_id = None
+        self.price_id = None
+        self.image_id = None
         self._apply_mutation()
 
     def _apply_mutation(self):
@@ -182,3 +226,7 @@ class Skeleton:
                     self.checkout_id = mutation.get_id()
                 case AddNavigationId(step, _):
                     self.navigation_id = mutation.get_id()
+                case AddPriceId(step, _):
+                    self.price_id = mutation.get_id()
+                case AddImageId(step, _):
+                    self.image_id = mutation.get_id()

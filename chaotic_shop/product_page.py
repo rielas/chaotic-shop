@@ -1,6 +1,7 @@
 from fasthtml.common import (
     Title,
     Main,
+    Strong,
     Img,
     Div,
     H1,
@@ -128,6 +129,22 @@ def product_page(product_id: int):
                         id=skeleton.navigation_id if skeleton.navigation_id else None,
                     )
                 )
+            elif element == "price":
+                content.append(
+                    P(
+                        Strong(product["price"]),
+                        _class="product-price",
+                        id=skeleton.price_id if skeleton.price_id else None,
+                    )
+                )
+            elif element == "image":
+                content.append(
+                    Img(
+                        src="https://placehold.co/300",
+                        _class="product-image",
+                        id=skeleton.image_id if skeleton.image_id else None,
+                    )
+                )
 
         return (
             Title(product["name"]),
@@ -140,8 +157,6 @@ def product_page(product_id: int):
                     Aside(category_list),
                     Section(
                         H1(product["name"]),
-                        Img(src="https://placehold.co/300"),
-                        P(product["price"]),
                         P(product["category"]),
                         *content,
                         _class="main-content centered",

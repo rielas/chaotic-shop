@@ -25,32 +25,70 @@
     flex-direction: column;
 }
 
+p.product-description {
+    margin: 1rem;
+    padding: 1rem;
+}
+
 p.product-description[id] {
     background-color: rgba(255, 159, 174, 0.3);
+}
+
+div.navigation {
     margin: 1rem;
     padding: 1rem;
 }
 
 div.navigation[id] {
     background-color: rgba(253, 233, 149, 0.3);
+}
+
+nav.navigation {
     margin: 1rem;
     padding: 1rem;
 }
 
 nav.navigation[id] {
     background-color: rgba(253, 233, 149, 0.3);
+}
+
+div.leave-review {
     margin: 1rem;
     padding: 1rem;
 }
 
 div.leave-review[id] {
     background-color: rgba(166, 225, 197, 0.3);
+}
+
+div.checkout {
     margin: 1rem;
     padding: 1rem;
 }
 
 div.checkout[id] {
     background-color: rgba(167, 224, 246, 0.3);
-    margin: 1rem;
+}
+
+.product-price {
+    font-size: 1.5em;
+    color: #333;
+    margin: 10px 0;
     padding: 1rem;
+}
+
+.product-price[id] {
+    background-color: rgba(255, 223, 186, 0.3);
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+    padding: 1rem;
+}
+
+.product-image[id] {
+    background-color: rgba(186, 255, 201, 0.3);
 }

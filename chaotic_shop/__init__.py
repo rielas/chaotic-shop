@@ -45,8 +45,8 @@ def navigation():
         Nav(
             Ul(Li(Strong("Chaotic Shop"))),
             Ul(
-                Li(Button("Home", href="/")),
-                Li(Button("Products", href="/")),
+                Li(A("Home", href="/")),
+                Li(A("Categories", href="/")),
             ),
         ),
     )
@@ -70,8 +70,7 @@ def home():
     )
     return (
         Title("Chaotic Shop"),
-        navigation(),
-        Main(category_list),
+        Main(navigation(), Main(category_list), _class="container"),
     )
 
 

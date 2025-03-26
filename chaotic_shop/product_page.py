@@ -78,7 +78,7 @@ def product_page(product_id: int):
                             method="post",
                             action="/submit_review",
                         ),
-                        _class="leave-review-id container",
+                        _class="leave-review container",
                         id=(
                             skeleton.leave_review_id
                             if skeleton.leave_review_id
@@ -102,24 +102,29 @@ def product_page(product_id: int):
                 )
             elif element == "navigation":
                 content.append(
-                    Div(
-                        Div(
-                            (
-                                A("Previous Product", href=f"/product/{previous_id}")
-                                if previous_id is not None
-                                else ""
+                    Nav(
+                        Ul(
+                            Li(
+                                (
+                                    A(
+                                        "Previous",
+                                        href=f"/product/{previous_id}",
+                                    )
+                                    if previous_id is not None
+                                    else ""
+                                ),
+                                _class="navigation-left",
                             ),
-                            _class="navigation-left",
-                        ),
-                        Div(
-                            (
-                                A("Next Product", href=f"/product/{next_id}")
-                                if next_id is not None
-                                else ""
+                            Li(
+                                (
+                                    A("Next", href=f"/product/{next_id}")
+                                    if next_id is not None
+                                    else ""
+                                ),
+                                _class="navigation-right",
                             ),
-                            _class="navigation-right",
-                        ),
-                        _class="navigation",
+                            _class="navigation-previous-next",
+                        )
                     )
                 )
 

@@ -43,7 +43,7 @@ CHAOS_DEGREE = 2
 def navigation():
     return Header(
         Nav(
-            Ul(Li(Strong("Chaotic Shop"))),
+            Ul(Li(Strong("Chaotic Shop 😵‍💫"))),
             Ul(
                 Li(A("Home", href="/")),
                 Li(A("Categories", href="/")),

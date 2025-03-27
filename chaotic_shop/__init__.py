@@ -60,7 +60,7 @@ def home():
         *[
             Article(
                 Header(category),
-                Img(src="https://placehold.co/200"),
+                Img(src=f"https://picsum.photos/id/{i}/300/200", _class="center-image"),
                 P(descriptions[i]),
                 P(A(f"View {category}", href=f"/category/{category}")),
             )
@@ -86,7 +86,10 @@ def category(category: str):
         *[
             Article(
                 Header(product["name"]),
-                Img(src="https://placehold.co/200"),
+                Img(
+                    src=f"https://picsum.photos/id/{product['id']}/300/200",
+                    _class="center-image",
+                ),
                 P(product["description"]),
                 P(product["price"]),
                 P(product["category"]),

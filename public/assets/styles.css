@@ -25,6 +25,12 @@
     flex-direction: column;
 }
 
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 p.product-description {
     margin: 1rem;
     padding: 1rem;
@@ -160,6 +166,8 @@ div.back-to-products[id] {
     margin: 20px 0;
     padding: 1rem;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .product-image::before {
@@ -172,4 +180,8 @@ div.back-to-products[id] {
 
 .product-image[id] {
     background-color: rgba(186, 255, 201, 0.3);
+}
+
+.main-content {
+    max-width: 576px;
 }

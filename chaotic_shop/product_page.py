@@ -140,9 +140,9 @@ def product_page(product_id: int):
             elif element == "image":
                 content.append(
                     Img(
-                        src="https://placehold.co/300",
-                        _class="product-image",
+                        src=f"https://picsum.photos/id/{product['id']}/300/200",
                         id=skeleton.image_id if skeleton.image_id else None,
+                        _class="product-image",
                     )
                 )
 
@@ -159,7 +159,7 @@ def product_page(product_id: int):
                         H1(product["name"]),
                         P(product["category"]),
                         *content,
-                        _class="main-content centered",
+                        _class="main-content centered container",
                     ),
                     _class="container content-wrapper",
                 ),

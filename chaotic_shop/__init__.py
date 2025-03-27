@@ -23,6 +23,7 @@ from fasthtml.common import (
 import core
 from chaotic_shop.product_page import product_page
 import time
+from typing import List, Tuple
 
 app, rt = fast_app(
     hdrs=(
@@ -49,6 +50,24 @@ def navigation():
                 Li(A("Categories", href="/")),
             ),
         ),
+    )
+
+
+def breadcrumbs(crumbs: List[Tuple | str]) -> Nav:
+    """
+    Generate a breadcrumb navigation.
+    :param crumbs: Tuples of (label, href) or a single string for the current page.
+    """
+    return Nav(
+        Ul(
+            *[
+                Li(A(crumb[0], href=crumb[1]))
+                if isinstance(crumb, tuple)
+                else Li(crumb)
+                for crumb in crumbs
+            ],
+        ),
+        **{"aria-label": "breadcrumb"},
     )
 
 
@@ -87,7 +106,7 @@ def category(category: str):
             Article(
                 Header(product["name"]),
                 Img(
-                    src=f"https://picsum.photos/id/{product['id']}/300/200",
+                    src=f"https://picsum.photos/id/{product['id'] % 1000}/300/200",
                     _class="center-image",
                 ),
                 P(product["description"]),
@@ -107,7 +126,13 @@ def category(category: str):
             Main(
                 Aside(category_list),
                 Section(
-                    H1(f"Products in {category}"),
+                    breadcrumbs(
+                        [
+                            ("Categories", "/"),
+                            (category, f"/category/{category}"),
+                            f"Products in {category}",
+                        ]
+                    ),
                     P(f"Explore our wide range of {category} products."),
                     product_list,
                     _class="container",

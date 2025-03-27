@@ -140,7 +140,7 @@ def product_page(product_id: int):
             elif element == "image":
                 content.append(
                     Img(
-                        src=f"https://picsum.photos/id/{product['id']}/300/200",
+                        src=f"https://picsum.photos/id/{product['id'] % 1000}/300/200",
                         id=skeleton.image_id if skeleton.image_id else None,
                         _class="product-image",
                     )
@@ -156,7 +156,13 @@ def product_page(product_id: int):
                 Div(
                     Aside(category_list),
                     Section(
-                        H1(product["name"]),
+                        chaotic_shop.breadcrumbs(
+                            [
+                                ("Categories", "/"),
+                                (category, f"/category/{category}"),
+                                product["name"],
+                            ]
+                        ),
                         P(product["category"]),
                         *content,
                         _class="main-content centered container",

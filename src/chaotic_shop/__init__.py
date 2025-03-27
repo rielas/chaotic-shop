@@ -24,6 +24,7 @@ import core
 from chaotic_shop.product_page import product_page
 import time
 from typing import List, Tuple
+import os
 
 app, rt = fast_app(
     hdrs=(
@@ -38,7 +39,7 @@ app, rt = fast_app(
     static_path="public",
 )
 
-CHAOS_DEGREE = 5
+CHAOS_DEGREE = int(os.getenv("CHAOS_DEGREE", 0))
 
 
 def navigation():

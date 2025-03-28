@@ -121,7 +121,6 @@ def category(category: str):
                 ),
                 P(product["description"]),
                 P(product["price"]),
-                P(product["category"]),
                 A("View", href=f"/product/{product['id']}"),
             )
             for product in products

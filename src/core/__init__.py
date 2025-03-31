@@ -1,7 +1,8 @@
 from .names import ADJECTIVES, NOUNS, DESCRIPTIONS, CATEGORIES_DESCRIPTIONS
 from typing import Generator
+import os
 
-NUMBER_OF_PRODUCTS = 10000
+NUMBER_OF_PRODUCTS = int(os.getenv("NUMBER_OF_PRODUCTS", 1000))
 
 
 def get_category(id: int) -> str:

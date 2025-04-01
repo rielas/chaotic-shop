@@ -1,0 +1,34 @@
+name: Docker Publish
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate branch name
+        run: echo "BRANCH_NAME=$(echo ${{ github.ref }} | cut -d'/' -f3)" >> $GITHUB_ENV
+
+      - name: Generate short SHA
+        run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_ENV
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/chaotic-shop:latest,${{ vars.DOCKERHUB_USERNAME }}/chaotic-shop:${{ env.BRANCH_NAME }}-${{ env.SHORT_SHA }}

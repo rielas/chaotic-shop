@@ -3,7 +3,6 @@ from fasthtml.common import (
     Aside,
     Strong,
     Img,
-    Button,
     Section,
     Div,
     H1,
@@ -39,7 +38,8 @@ app, rt = fast_app(
     static_path="public",
 )
 
-CHAOS_DEGREE = int(os.getenv("CHAOS_DEGREE", 0))
+CATEGORY_CHAOS = int(os.getenv("CATEGORY_CHAOS", 0))
+PRODUCT_CHAOS = int(os.getenv("PRODUCT_CHAOS", 0))
 
 
 def navigation():
@@ -62,9 +62,11 @@ def breadcrumbs(crumbs: List[Tuple | str]) -> Nav:
     return Nav(
         Ul(
             *[
-                Li(A(crumb[0], href=crumb[1]))
-                if isinstance(crumb, tuple)
-                else Li(crumb)
+                (
+                    Li(A(crumb[0], href=crumb[1]))
+                    if isinstance(crumb, tuple)
+                    else Li(crumb)
+                )
                 for crumb in crumbs
             ],
         ),

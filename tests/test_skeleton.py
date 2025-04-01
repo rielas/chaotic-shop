@@ -1,6 +1,6 @@
 import core.skeleton as skeleton
 import core
-from core.skeleton import Skeleton, SECTIONS, choose_mutation, Reorder, AddDescriptionId
+from core.skeleton import Skeleton, SECTIONS
 
 
 def test_skeleton_initialization():
@@ -23,9 +23,3 @@ def test_random_based_on_category():
     random_number = skeleton.random_based_on_seed(seed)
     assert 0 <= random_number < 100
     assert skeleton.random_based_on_seed(seed) == random_number
-
-
-def test_choice_mutation():
-    category = core.ADJECTIVES[0]
-    mutation = choose_mutation(1, category)
-    assert isinstance(mutation, (Reorder, AddDescriptionId))

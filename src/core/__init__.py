@@ -1,4 +1,9 @@
-from .names import ADJECTIVES, NOUNS, DESCRIPTIONS, CATEGORIES_DESCRIPTIONS
+from .names import (
+    ADJECTIVES,
+    NOUNS,
+    DESCRIPTIONS,
+    CATEGORIES_DESCRIPTIONS as CATEGORIES_DESCRIPTIONS,
+)
 from typing import Generator
 import os
 

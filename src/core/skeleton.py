@@ -128,14 +128,14 @@ Mutation = (
 )
 
 
-def choose_mutation(step: int, category: str) -> Mutation:
+def choose_mutation(step: int, category: str, product_id: int = 0) -> Mutation:
     """
     Choose a mutation based on the step and category.
     """
     category_index = core.ADJECTIVES.index(category)
 
     mutation = random_based_on_seed(
-        category_index * 1000 + step, len(Mutation.__args__) + 3
+        category_index * 1000 + product_id + step, len(Mutation.__args__) + 4
     )
     match mutation:
         case 0:
@@ -156,14 +156,23 @@ def choose_mutation(step: int, category: str) -> Mutation:
             return Reorder(step)
 
 
-def generate_mutations(chaos_degree: int, category: str) -> list[Mutation]:
+def generate_mutations(
+    category_chaos: int,
+    category: str,
+    product_chaos: int = 0,
+    product_id: int | None = None,
+) -> list[Mutation]:
     """
     Generate a list of mutations based on the chaos degree and category.
     """
     mutations = []
 
-    for i in range(chaos_degree):
+    for i in range(category_chaos):
         mutation = choose_mutation(i, category)
+        mutations.append(mutation)
+
+    for i in range(product_chaos):
+        mutation = choose_mutation(i, category, product_id)
         mutations.append(mutation)
 
     return mutations
@@ -190,14 +199,18 @@ def make_random_move(i: int, elements: list[str], category: str) -> list[str]:
 
 
 class Skeleton:
-    def __init__(self, chaos_degree: int, category: str):
+    def __init__(
+        self, chaos_degree: int, category: str, product_id: int, product_chaos: int = 0
+    ):
         if category not in core.ADJECTIVES:
             raise ValueError(f"Invalid category: {category}")
 
         if chaos_degree < 0:
             raise ValueError(f"Chaos degree must be non-negative, got {chaos_degree}")
 
-        self.mutations = generate_mutations(chaos_degree, category)
+        self.mutations = generate_mutations(
+            chaos_degree, category, product_chaos, product_id
+        )
         self.category = category
         self.sections = SECTIONS
         self.description_id = None

@@ -27,7 +27,12 @@ def product_page(product_id: int):
     categories = core.ADJECTIVES
     product = core.generate_product_by_id(product_id)
     category = product["category"]
-    skeleton = Skeleton(chaos_degree=chaotic_shop.CHAOS_DEGREE, category=category)
+    skeleton = Skeleton(
+        chaos_degree=chaotic_shop.CATEGORY_CHAOS,
+        category=category,
+        product_chaos=chaotic_shop.PRODUCT_CHAOS,
+        product_id=product_id,
+    )
     elements = skeleton.sections
     category_list = Nav(
         Ul(*[Li(A(category, href=f"/category/{category}")) for category in categories]),

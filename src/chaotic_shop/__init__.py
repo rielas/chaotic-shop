@@ -47,9 +47,15 @@ def navigation():
         Nav(
             Ul(Li(Strong("Chaotic Shop 😵‍💫"))),
             Ul(
-                Li(A("Home", href="/")),
-                Li(A("Categories", href="/")),
+                Li(
+                    Strong("Chaos Levels: "),
+                    f"category {CATEGORY_CHAOS}, "
+                    f"product {PRODUCT_CHAOS}, "
+                    f"Number of products {core.NUMBER_OF_PRODUCTS}",
+                    _class="chaos-levels",
+                ),
             ),
+            Ul(Li(A("Home", href="/")), Li(A("Categories", href="/"))),
         ),
     )
 

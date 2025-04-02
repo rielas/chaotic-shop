@@ -185,3 +185,9 @@ div.back-to-products[id] {
 .main-content {
     max-width: 576px;
 }
+
+.chaos-levels {
+    font-size: 0.9em;
+    color: #555;
+    margin-left: 1rem;
+}

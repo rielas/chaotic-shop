@@ -77,10 +77,43 @@ def product_page(product_id: int):
                                 Label("Name:"),
                                 Input(type="text", name="name", required=True),
                             ),
+                            *(
+                                [
+                                    Div(
+                                        Label("Last Name:"),
+                                        Input(
+                                            type="text", name="last_name", required=True
+                                        ),
+                                    )
+                                ]
+                                if skeleton.last_name
+                                else []
+                            ),
+                            *(
+                                [
+                                    Div(
+                                        Label("Email:"),
+                                        Input(
+                                            type="email", name="email", required=True
+                                        ),
+                                    )
+                                ]
+                                if skeleton.email
+                                else []
+                            ),
                             Div(
                                 Label("Review:"), Textarea(name="review", required=True)
                             ),
-                            Div(Input(type="submit", value="Submit")),
+                            Div(
+                                Input(
+                                    type="submit",
+                                    value=(
+                                        skeleton.leave_review_text
+                                        if skeleton.leave_review_text
+                                        else "Submit"
+                                    ),
+                                )
+                            ),
                             method="post",
                             action="/submit_review",
                         ),

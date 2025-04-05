@@ -128,6 +128,40 @@ class ChangeCheckoutText:
         return f"Checkout now! (only {self.product_id} items left!)"
 
 
+@dataclass
+class ChangeLeaveReviewText:
+    step: int
+    product_id: int
+
+    def get_text(self) -> str:
+        """
+        Get the modified leave review text.
+        """
+        return f"Share your thoughts about product #{self.product_id}!"
+
+
+@dataclass
+class FlipLastName:
+    step: int
+
+    def flip(self) -> bool:
+        """
+        Flip the last name flag based on the step.
+        """
+        return self.step % 2 == 0
+
+
+@dataclass
+class FlipEmail:
+    step: int
+
+    def flip(self) -> bool:
+        """
+        Flip the email flag based on the step.
+        """
+        return self.step % 2 == 0
+
+
 Mutation = (
     Reorder
     | AddDescriptionId
@@ -138,6 +172,9 @@ Mutation = (
     | AddPriceId
     | AddImageId
     | ChangeCheckoutText
+    | ChangeLeaveReviewText
+    | FlipLastName
+    | FlipEmail
 )
 
 
@@ -167,6 +204,12 @@ def choose_mutation(step: int, category: str, product_id: int = 0) -> Mutation:
             return AddImageId(step, category)
         case 7:
             return ChangeCheckoutText(step, product_id)
+        case 8:
+            return ChangeLeaveReviewText(step, product_id)
+        case 9:
+            return FlipLastName(step)
+        case 10:
+            return FlipEmail(step)
         case _:
             return Reorder(step)
 
@@ -233,6 +276,9 @@ class Skeleton:
         self.leave_review_id = None
         self.checkout_id = None
         self.checkout_text = None
+        self.leave_review_text = None
+        self.last_name = False
+        self.email = False
         self.navigation_id = None
         self.price_id = None
         self.image_id = None
@@ -259,3 +305,9 @@ class Skeleton:
                     self.image_id = mutation.get_id()
                 case ChangeCheckoutText(step, product_id):
                     self.checkout_text = mutation.get_text()
+                case ChangeLeaveReviewText(step, product_id):
+                    self.leave_review_text = mutation.get_text()
+                case FlipLastName(step):
+                    self.last_name = mutation.flip()
+                case FlipEmail(step):
+                    self.email = mutation.flip()

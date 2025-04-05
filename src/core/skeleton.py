@@ -116,6 +116,18 @@ class AddImageId:
         return f"{self.category.lower()}_{random}"
 
 
+@dataclass
+class ChangeCheckoutText:
+    step: int
+    product_id: int
+
+    def get_text(self) -> str:
+        """
+        Get the modified checkout text.
+        """
+        return f"Checkout now! (only {self.product_id} items left!)"
+
+
 Mutation = (
     Reorder
     | AddDescriptionId
@@ -125,6 +137,7 @@ Mutation = (
     | AddNavigationId
     | AddPriceId
     | AddImageId
+    | ChangeCheckoutText
 )
 
 
@@ -152,6 +165,8 @@ def choose_mutation(step: int, category: str, product_id: int = 0) -> Mutation:
             return AddPriceId(step, category)
         case 6:
             return AddImageId(step, category)
+        case 7:
+            return ChangeCheckoutText(step, product_id)
         case _:
             return Reorder(step)
 
@@ -217,6 +232,7 @@ class Skeleton:
         self.back_to_products_id = None
         self.leave_review_id = None
         self.checkout_id = None
+        self.checkout_text = None
         self.navigation_id = None
         self.price_id = None
         self.image_id = None
@@ -241,3 +257,5 @@ class Skeleton:
                     self.price_id = mutation.get_id()
                 case AddImageId(step, _):
                     self.image_id = mutation.get_id()
+                case ChangeCheckoutText(step, product_id):
+                    self.checkout_text = mutation.get_text()

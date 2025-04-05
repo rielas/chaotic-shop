@@ -97,7 +97,16 @@ def product_page(product_id: int):
                     Div(
                         Form(
                             Input(type="hidden", name="product_id", value=product_id),
-                            Div(Input(type="submit", value="Checkout")),
+                            Div(
+                                Input(
+                                    type="submit",
+                                    value=(
+                                        skeleton.checkout_text
+                                        if skeleton.checkout_text
+                                        else "Checkout"
+                                    ),
+                                )
+                            ),
                             method="post",
                             action="/checkout",
                         ),

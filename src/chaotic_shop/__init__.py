@@ -168,7 +168,7 @@ def get(product_id: int):
     return product_page(product_id)
 
 
-@rt("/submit_review", methods=["POST"])
+@rt("/submit_review", methods=["POST", "GET"])
 def post(request: dict):
     product_id = request.get("product_id")
     name = request.get("name")
